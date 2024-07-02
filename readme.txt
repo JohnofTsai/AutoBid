@@ -1,0 +1,1 @@
+To run the solution, set it to multi-startup projects, the startup order is: AutoBid.Server, autobid.client
