@@ -1,0 +1,6 @@
+@AutoBid.Server_HostAddress = http://localhost:5088
+
+GET {{AutoBid.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
