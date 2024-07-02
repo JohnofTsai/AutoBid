@@ -15,7 +15,7 @@ namespace AutoBid.Server.Controllers
         public FeesComputingController(IBiddingFeesCalculator calc, ILogger<FeesComputingController> logger)
         {
             this._calc = calc;
-            _logger = logger;   
+            this._logger = logger;   
         }
 
         [HttpPost(Name = "ComputeBiddingFee")]

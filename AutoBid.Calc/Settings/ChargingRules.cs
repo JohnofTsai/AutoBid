@@ -16,8 +16,6 @@
 
         public double SellerSpecialLuxuryFee { get; set; }
 
-        public double AdditionalCost { get; set; }
-
         public double StorageFee { get; set; }
 
         public Dictionary<(double?, double?), double> AssociationRates { get; set; } = new Dictionary<(double?, double?), double>();

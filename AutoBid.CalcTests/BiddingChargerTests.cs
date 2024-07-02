@@ -55,6 +55,7 @@ namespace AutoBid.Calc.Tests
             rules.AssociationRates.Add((500, 1000), 10);
             rules.AssociationRates.Add((1000, 3000), 15);
             rules.AssociationRates.Add((3000, null), 30);
+
             var reader = Substitute.For<IChargeRulesProvider>();
             reader.GetChargeRules().Returns(rules);
 

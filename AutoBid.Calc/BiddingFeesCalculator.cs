@@ -2,10 +2,6 @@
 
 namespace AutoBid.Calc
 {
-    public interface IBiddingFeesCalculator
-    {
-        AutoBidFees CalcBiddingFees(Vehicle vehicle);
-    }
     public class BiddingFeesCalculator : IBiddingFeesCalculator
     {
         private readonly ChargingRules _chargeRules;
@@ -21,12 +17,12 @@ namespace AutoBid.Calc
                 BasePrice = vehicle.Price,
                 BasicUserFee = CalcCommonFee(vehicle),
                 SellerSpecialFee = CalcSpecialFee(vehicle),
-                AssociationFee = calcAssociaFee(vehicle),
+                AssociationFee = CalcAssociaFee(vehicle),
                 StorageFee = _chargeRules.StorageFee
             };
         }
 
-        public double CalcCommonFee(Vehicle vehicle)
+        private double CalcCommonFee(Vehicle vehicle)
         {
             var fee = vehicle.Price * _chargeRules.BasicUserRate;
 
@@ -41,7 +37,7 @@ namespace AutoBid.Calc
             }
         }
 
-        public double CalcSpecialFee(Vehicle vehicle)
+        private double CalcSpecialFee(Vehicle vehicle)
         {
             switch (vehicle.VehType)
             {
@@ -53,9 +49,9 @@ namespace AutoBid.Calc
             }
         }
 
-        public double calcAssociaFee(Vehicle vehicle)
+        private double CalcAssociaFee(Vehicle vehicle)
         {
-            var segFee = _chargeRules.AssociationRates?.FirstOrDefault(s => vehicle.Price >= s.Key.Item1 && vehicle.Price < (s.Key.Item2 ?? double.MaxValue) ).Value;
+            var segFee = _chargeRules.AssociationRates?.FirstOrDefault( s => vehicle.Price > (s.Key.Item1 ?? double.MinValue ) && vehicle.Price <= (s.Key.Item2 ?? double.MaxValue) ).Value;
             return segFee ?? 0;
         }
     }

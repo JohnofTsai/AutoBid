@@ -14,6 +14,7 @@ namespace AutoBid.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
             builder.Services.RegisterServices();
 
             const string CORS_POLICY = "CORSPOLICY";
@@ -22,7 +23,7 @@ namespace AutoBid.Server
                 options.AddPolicy(name: CORS_POLICY,
                                   builder =>
                                   {
-                                      builder.AllowAnyOrigin();
+                                      builder.WithOrigins("https://localhost:5173");
                                       builder.AllowAnyHeader();
                                       builder.AllowAnyMethod();
                                   }
